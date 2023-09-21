@@ -1,0 +1,22 @@
+version: "1.0"
+services:
+  frontend:
+    build: ./BicasCasino/
+    image: bicas-frontend
+    restart: always
+    ports:
+      - 4000:4000
+  backend:
+    build: ./Backend/
+    image: bicas-backend
+    restart: always
+    ports:
+      - 8282:8282
+    volumes:
+      - ./logs/:/Backend/
+  nginx:
+    build: ./nginx/
+    image: bicas-nginx
+    restart: always
+    ports:
+      - 8585:8585
