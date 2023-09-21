@@ -1,0 +1,6 @@
+[submodule "Backend"]
+	path = Backend
+	url = https://github.com/BICAS-web3/Backend.git
+[submodule "BicasCasino"]
+	path = BicasCasino
+	url = https://github.com/BICAS-web3/BicasCasino.git
