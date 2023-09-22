@@ -16,6 +16,8 @@ services:
     container_name: bicas-nginx
     restart: always
     network_mode: "host"
+    volumes:
+      - ./BicasCasino/src/public:/public
   db:
     image: postgres:14.1-alpine
     container_name: bicas-db
