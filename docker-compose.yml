@@ -2,8 +2,8 @@ version: "1.0"
 services:
   backend:
     build: ./Backend/
-    image: bicas-backend
-    container_name: bicas-backend
+    image: backend
+    container_name: backend
     restart: always
     # network_mode: "host"
     ports:
