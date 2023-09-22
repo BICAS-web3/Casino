@@ -5,9 +5,11 @@ services:
     image: bicas-backend
     container_name: bicas-backend
     restart: always
-    network_mode: "host"
-    # ports:
-    #   - 8282:8282
+    # network_mode: "host"
+    ports:
+      - 8282:8282
+    networks:
+      - bicasnet
     volumes:
       - ./logs/:/Backend/logs/
   nginx:
@@ -15,7 +17,11 @@ services:
     image: bicas-nginx
     container_name: bicas-nginx
     restart: always
-    network_mode: "host"
+    # network_mode: "host"
+    ports:
+      - '8585:8585'
+    networks:
+      - bicasnet
     volumes:
       - ./BicasCasino/src/public:/public
   db:
@@ -28,13 +34,15 @@ services:
       - APP_DB_USER=bicas
       - APP_DB_PASS=bicas
       - APP_DB_NAME=bicas
-    # ports:
-    #   - '5433:5433'
-    network_mode: "host"
+    ports:
+      - '5433:5433'
+    networks:
+      - bicasnet
+    #network_mode: "host"
     volumes:
       - ./db-data/:/var/lib/postgresql/data
       - ./Backend/db_scheme/scheme.sql:/docker-entrypoint-initdb.d/create_tables.sql
 
-# volumes:
-#   db:
-#     driver: local
+networks:
+  bicasnet:
+    driver: bridge
