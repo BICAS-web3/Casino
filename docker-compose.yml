@@ -1,22 +1,38 @@
 version: "1.0"
 services:
-  frontend:
-    build: ./BicasCasino/
-    image: bicas-frontend
-    restart: always
-    ports:
-      - 4000:4000
   backend:
     build: ./Backend/
     image: bicas-backend
+    container_name: bicas-backend
     restart: always
-    ports:
-      - 8282:8282
+    network_mode: "host"
+    # ports:
+    #   - 8282:8282
     volumes:
-      - ./logs/:/Backend/
+      - ./logs/:/Backend/logs/
   nginx:
     build: ./nginx/
     image: bicas-nginx
+    container_name: bicas-nginx
     restart: always
-    ports:
-      - 8585:8585
+    network_mode: "host"
+  db:
+    image: postgres:14.1-alpine
+    container_name: bicas-db
+    restart: always
+    environment:
+      - POSTGRES_USER=bicas
+      - POSTGRES_PASSWORD=bicas
+      - APP_DB_USER=bicas
+      - APP_DB_PASS=bicas
+      - APP_DB_NAME=bicas
+    # ports:
+    #   - '5433:5433'
+    network_mode: "host"
+    volumes:
+      - ./db-data/:/var/lib/postgresql/data
+      - ./Backend/db_scheme/scheme.sql:/docker-entrypoint-initdb.d/create_tables.sql
+
+# volumes:
+#   db:
+#     driver: local
