@@ -46,3 +46,6 @@ services:
 networks:
   bicasnet:
     driver: bridge
+
+# extra_hosts:
+#   - "host.docker.internal:host-gateway"
