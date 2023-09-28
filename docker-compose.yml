@@ -35,7 +35,7 @@ services:
       - APP_DB_PASS=bicas
       - APP_DB_NAME=bicas
     ports:
-      - '5433:5433'
+      - '5432:5432'
     networks:
       - bicasnet
     #network_mode: "host"
