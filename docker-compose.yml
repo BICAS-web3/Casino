@@ -42,6 +42,17 @@ services:
     volumes:
       - ./db-data/:/var/lib/postgresql/data
       - ./Backend/db_scheme/scheme.sql:/docker-entrypoint-initdb.d/create_tables.sql
+  frontend:
+    build: ./BicasCasino/
+    image: frontend
+    container_name: frontend
+    ports:
+      - '4000:4000'
+    networks:
+      - bicasnet
+    volumes:
+      - ./BicasCasino/:/app
+      - /app/node_modules
 
 networks:
   bicasnet:
